@@ -1,0 +1,65 @@
+<polymer-element name="ceci-bool" extends="ceci-element" attributes="checkif" checkif="hello">
+  <ceci-definition>
+    {
+      "name": "Boolean",
+      "thumbnail": "./thumbnail.png",
+      "description": "Checks if a message matches the condition and broadcasts true or false.",
+      "broadcasts": {
+        "true": {
+          "label": "True",
+          "description": "The signal matches the condition.",
+          "default" : true
+        },
+        "false": {
+          "label": "False",
+          "description": "The signal doesn't match the condition."
+        }
+      },
+
+      "listeners": {
+        "incomingMessage": {
+          "description": "Increment the total by the increment value",
+          "label": "Incoming Message",
+          "default" : true
+        }
+      },
+      "attributes": {
+        "checkif": {
+          "description": "Check if the incoming signal matches this string.",
+          "label": "Check If",
+          "editable": "Text",
+          "default" : true
+        }
+      }
+    }
+  </ceci-definition>
+  <template>
+    <link rel="stylesheet" href="component.css">
+
+    <div class="rule">
+      Does the signal equal <span class="checkif">"{{checkif}}"</span> ?
+    </div>
+
+    <shadow></shadow>
+  </template>
+  <tags>starter,math</tags>
+
+    <script>
+      Polymer("ceci-bool", {
+        ready: function() {
+          this.super();
+        },
+        attached : function(){
+          this.super();
+        },
+        incomingMessage : function(e){
+          if(e == this.checkif) {
+            this.broadcast("true", "true");
+          } else {
+            this.broadcast("false", "false");
+          }
+
+        }
+      });
+    </script>
+</polymer-element>
